@@ -1,0 +1,12 @@
+namePrefix: badminton-
+commonLabels:
+  infra: docker
+resources:
+- namespace.yaml
+bases:
+- ../../../base
+namespace: badminton
+patchesStrategicMerge:
+- healthCheck.yaml
+- cluster.yaml
+- clusterClass.yaml

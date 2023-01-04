@@ -1,0 +1,17 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: MachineHealthCheck
+metadata:
+  name: healthcheck
+spec:
+  clusterName: capi-docker
+  nodeStartupTimeout: 15m
+  selector:
+    matchLabels:
+      cluster.x-k8s.io/cluster-name: capi-docker
+  unhealthyConditions:
+  - type: Ready
+    status: Unknown
+    timeout: 600s
+  - type: Ready
+    status: "False"
+    timeout: 600s

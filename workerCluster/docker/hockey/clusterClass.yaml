@@ -1,0 +1,29 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: ClusterClass
+metadata:
+  name: cluster-class
+  namespace: default
+spec:
+  controlPlane:
+    machineInfrastructure:
+      ref:
+        name: hockey-machine-template
+    ref:
+      name: hockey-kubeadm-control-plane-template
+  infrastructure:
+    ref:
+      name: hockey-cluster
+  workers:
+    machineDeployments:
+    - class: default-worker
+      template:
+        bootstrap:
+          ref:
+            apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+            kind: KubeadmConfigTemplate
+            name: hockey-kubeadm-template
+        infrastructure:
+          ref:
+            apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+            kind: DockerMachineTemplate
+            name: hockey-machine-template

@@ -1,0 +1,12 @@
+namePrefix: cricket-
+commonLabels:
+  infra: docker
+resources:
+- namespace.yaml
+bases:
+- ../../../base
+namespace: cricket
+patchesStrategicMerge:
+- healthCheck.yaml
+- cluster.yaml
+- clusterClass.yaml

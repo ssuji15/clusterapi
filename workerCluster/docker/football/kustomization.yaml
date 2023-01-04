@@ -1,0 +1,12 @@
+namePrefix: football-
+commonLabels:
+  infra: docker
+resources:
+- namespace.yaml
+bases:
+- ../../../base
+namespace: football
+patchesStrategicMerge:
+- healthCheck.yaml
+- cluster.yaml
+- clusterClass.yaml

@@ -1,0 +1,12 @@
+namePrefix: baseball-
+commonLabels:
+  infra: docker
+resources:
+- namespace.yaml
+bases:
+- ../../../base
+namespace: baseball
+patchesStrategicMerge:
+- healthCheck.yaml
+- cluster.yaml
+- clusterClass.yaml

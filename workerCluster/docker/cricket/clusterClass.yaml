@@ -1,0 +1,29 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: ClusterClass
+metadata:
+  name: cluster-class
+  namespace: default
+spec:
+  controlPlane:
+    machineInfrastructure:
+      ref:
+        name: cricket-machine-template
+    ref:
+      name: cricket-kubeadm-control-plane-template
+  infrastructure:
+    ref:
+      name: cricket-cluster
+  workers:
+    machineDeployments:
+    - class: default-worker
+      template:
+        bootstrap:
+          ref:
+            apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+            kind: KubeadmConfigTemplate
+            name: cricket-kubeadm-template
+        infrastructure:
+          ref:
+            apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+            kind: DockerMachineTemplate
+            name: cricket-machine-template
